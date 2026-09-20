@@ -36,7 +36,7 @@ class CampaignEvaluationRepositoryTest {
 
     @Test
     @DisplayName("Save a non existing evaluation")
-    void shouldSaveWhenAbsent_returnsEmpty() {
+    void shouldSaveWhenAbsent() {
         StoredEvaluation evaluation = storedEvaluation("eval-1", defaultRules, List.of("p-1"));
         Optional<StoredEvaluation> result = repository.saveIfAbsent(evaluation);
 
@@ -46,7 +46,7 @@ class CampaignEvaluationRepositoryTest {
 
     @Test
     @DisplayName("Should return a existing evaluation if present")
-    void shouldReturnEvaluationWhenPresent_ReturnsEvaluation() {
+    void shouldReturnEvaluationWhenPresent() {
         StoredEvaluation original = storedEvaluation("eval-1", defaultRules, List.of("p-1"));
         StoredEvaluation duplicate = storedEvaluation("eval-1", defaultRules, List.of("p-2"));
 
@@ -59,7 +59,7 @@ class CampaignEvaluationRepositoryTest {
 
     @Test
     @DisplayName("Ensures atomicity under concurrent saves with the same id")
-    void shouldHandleConcurrentInsertsSafely_ReturnsEvaluation() throws InterruptedException {
+    void shouldHandleConcurrentInsertsSafely() throws InterruptedException {
         int threadCount = 10;
 
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
