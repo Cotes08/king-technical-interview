@@ -8,11 +8,6 @@ public record CampaignRules(
         List<String> countries) {
 
     public boolean isPlayerEligible(PlayerProfile player) {
-        if (player.level() < this.minimumLevel)
-            return false;
-        if (!countries.contains(player.country()))
-            return false;
-
-        return true;
+        return player.level() >= minimumLevel && countries.contains(player.country());
     }
 }
