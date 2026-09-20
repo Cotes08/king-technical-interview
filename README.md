@@ -327,6 +327,15 @@ it up would require post-processing the `Path` in `GlobalExceptionHandler`.
 
 The following were deliberately left out of the current scope:
 
+- **Campaigns as a first-class resource**: the current response returns
+  only `campaignId`, referencing the campaign by identifier. A more
+  scalable design would expose campaigns as their own resource
+  (`GET /campaigns/{id}`, `PUT /campaigns/{id}/rules`) and let the
+  evaluation reference them by ID. This avoids duplicating rule data in
+  every evaluation response and follows standard REST resource
+  normalisation. It was left out because the assignment models the
+  campaign rules as part of the evaluation request, not as an
+  independently managed resource.
 - **Persistence**: swap the in-memory maps for JPA + H2/Postgres. The
   repository interfaces are already isolated, so the change would be
   contained.
