@@ -1,6 +1,7 @@
 package com.interview.king_exercise.api.dto;
 
 import java.util.List;
+import java.util.Locale;
 
 import com.interview.king_exercise.domain.CampaignRules;
 
@@ -15,7 +16,10 @@ public record CampaignRulesDto(
                 @NotEmpty(message = "countries cannot be empty") List<@NotBlank(message = "country code cannot be blank") String> countries) {
 
         public CampaignRules toDomain() {
-                return new CampaignRules(campaignId, minimumLevel, countries);
+                List<String> normalizedCountries = countries.stream()
+                                .map(country -> country.trim().toUpperCase(Locale.ROOT))
+                                .toList();
+                return new CampaignRules(campaignId, minimumLevel, normalizedCountries);
         }
 
 }
