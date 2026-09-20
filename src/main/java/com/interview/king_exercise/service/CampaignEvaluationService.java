@@ -34,13 +34,13 @@ public class CampaignEvaluationService {
     public CampaignEvaluationResponse createCampaignEvaluation(CampaignEvaluationRequest request) {
         CampaignRules campaignRules = request.campaignRules().toDomain();
 
+        validatePlayers(request.playerIds());
+
         StoredEvaluation storedEvaluation = new StoredEvaluation(
                 request.evaluationId(),
                 campaignRules,
                 request.playerIds(),
                 Instant.now());
-
-        validatePlayers(request.playerIds());
 
         Optional<StoredEvaluation> optionalStorage = evaluationRepository
                 .saveIfAbsent(storedEvaluation);
