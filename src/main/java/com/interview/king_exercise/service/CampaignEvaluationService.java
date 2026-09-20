@@ -89,7 +89,9 @@ public class CampaignEvaluationService {
 
     private List<PlayerResultDto> evaluatePlayers(List<String> playerIds, CampaignRules campaignRules) {
         return playerIds.stream().map(playerId -> {
-            PlayerProfile playerProfile = playerRepository.findBy(playerId).orElseThrow();
+            PlayerProfile playerProfile = playerRepository.findBy(playerId).orElseThrow(() -> new IllegalStateException(
+                    "Player not found: " + playerId + " (validation may have been skipped)"));
+
             return new PlayerResultDto(
                     playerId,
                     campaignRules.isPlayerEligible(playerProfile));
