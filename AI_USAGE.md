@@ -94,7 +94,7 @@ Each change was understood and applied by me after discussion.
 
 ## 3. Tests — significant AI assistance
 
-The test suite is where AI assistance was most substantial. I wrote the
+The test suite is where AI assistance was most substantial. I wrote some of the
 tests but Claude was directly involved in shaping several of them:
 
 - **`CampaignRulesTest`**: provided the initial structure (`@Nested` +
